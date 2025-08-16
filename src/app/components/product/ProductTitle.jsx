@@ -2,8 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { formatIDR } from '@/app/lib/utils/currency'
 
+/* --- Badge --- */
 const OpenTripBadge = () => (
-  <div className="inline-flex items-center gap-2 bg-[#0CA34C] text-white px-4 py-2 rounded-full text-sm">
+  <div className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-full text-sm">
     <Image
       src="/assets/icons/suitcase.svg"
       alt=""
@@ -15,38 +16,35 @@ const OpenTripBadge = () => (
   </div>
 )
 
-const ShipInfo = ({ name, icon }) => (
+/* --- Ship Info --- */
+const ShipInfo = ({ name, icon = '/assets/icons/ship-fill.svg' }) => (
   <div className="flex items-center gap-3">
-    <div className="bg-blue-700 p-1 rounded-md">
-      <Image
-        src="/assets/icons/ship-fill.svg"
-        alt=""
-        width={24}
-        height={24}
-        className="w-6 h-6 text-white fill-white"
-      />
+    <div className="bg-primary p-1 rounded-md">
+      <Image src={icon} alt="" width={24} height={24} className="w-6 h-6" />
     </div>
     <span className="font-semibold text-slate-900">{name}</span>
   </div>
 )
 
-// Component untuk konten kiri
+/* --- Left Content --- */
 const LeftContent = ({ badges, title, name, description }) => (
   <div className="space-y-6">
-    {badges.isOpenTrip && <OpenTripBadge />}
+    {badges?.isOpenTrip && <OpenTripBadge />}
 
     <h1 className="text-2xl md:text-4xl font-bold text-slate-900">{title}</h1>
 
     <ShipInfo name={name} />
 
-    <div className="pt-4">
-      <h2 className="text-xl font-bold text-slate-900 mb-3">Tentang kapal</h2>
-      <p className="text-slate-600">{description}</p>
-    </div>
+    {description && (
+      <section className="pt-4">
+        <h2 className="text-xl font-bold text-slate-900 mb-3">Tentang kapal</h2>
+        <p className="text-slate-600">{description}</p>
+      </section>
+    )}
   </div>
 )
 
-// Component untuk sidebar kanan
+/* --- Right Sidebar --- */
 const RightSidebar = ({
   guestText,
   priceText,
@@ -54,10 +52,10 @@ const RightSidebar = ({
   checkoutHref,
   name,
 }) => (
-  <div className="sticky top-24 rounded-2xl border border-slate-200 p-6 space-y-4">
+  <aside className="sticky top-24 rounded-2xl border border-slate-200 p-6 space-y-4">
     <div className="flex items-center gap-2 text-slate-900">
       <Image
-        src="/assets/icons/users.svg"
+        src="/assets/icons/people.svg"
         alt=""
         width={20}
         height={20}
@@ -71,7 +69,7 @@ const RightSidebar = ({
       <p className="text-2xl font-bold text-slate-900">{priceText}</p>
     </div>
 
-    <p className="text-slate-600">{tripText}</p>
+    {tripText && <p className="text-slate-600">{tripText}</p>}
 
     <Link href={checkoutHref} className="btn btn-primary w-full">
       Reservasi
@@ -80,38 +78,36 @@ const RightSidebar = ({
     <div className="pt-4 border-t border-slate-200 mt-4">
       <ShipInfo name={name} icon="/assets/icons/ship.svg" />
     </div>
-  </div>
+  </aside>
 )
 
-// Component untuk mobile bottom bar
+/* --- Mobile Bottom Bar --- */
 const MobileBottomBar = ({ guestText, priceText, tripText, checkoutHref }) => (
   <div className="fixed bottom-0 left-0 right-0 lg:hidden bg-white border-t border-slate-200 p-4 z-50">
     <div className="flex items-center justify-between gap-4">
       <div className="flex-1">
         <div className="flex items-center gap-2 mb-1">
           <Image
-            src="/assets/icons/users.svg"
+            src="/assets/icons/people.svg"
             alt=""
-            width={16}
-            height={16}
-            className="w-4 h-4"
+            width={20}
+            height={20}
+            className="w-5 h-5"
           />
           <span className="text-sm font-medium">{guestText}</span>
         </div>
         <p className="text-xs text-slate-600">Harga mulai</p>
         <p className="text-lg font-bold text-slate-900">{priceText}</p>
-        <p className="text-xs text-slate-600">{tripText}</p>
+        {tripText && <p className="text-xs text-slate-600">{tripText}</p>}
       </div>
-      <Link
-        href={checkoutHref}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-colors flex-shrink-0"
-      >
+      <Link href={checkoutHref} className="btn btn-primary flex-shrink-0">
         Reservasi
       </Link>
     </div>
   </div>
 )
 
+/* --- Main Component --- */
 export default function ProductTitle({
   title,
   description,
@@ -143,9 +139,8 @@ export default function ProductTitle({
 
   return (
     <>
-      <div className="max-w-7xl mx-auto py-6">
+      <div className="w-full mx-auto py-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Content - 2/3 width on desktop */}
           <div className="lg:col-span-2">
             <LeftContent
               badges={badges}
@@ -155,7 +150,6 @@ export default function ProductTitle({
             />
           </div>
 
-          {/* Right Sidebar - 1/3 width on desktop, hidden on mobile */}
           <div className="hidden lg:block">
             <RightSidebar
               guestText={guestText}
@@ -176,8 +170,8 @@ export default function ProductTitle({
         checkoutHref={checkoutHref}
       />
 
-      {/* Mobile padding bottom to prevent content overlap */}
-      <div className="lg:hidden h-32"></div>
+      {/* Prevent overlap with bottom bar */}
+      <div className="lg:hidden h-32" />
     </>
   )
 }

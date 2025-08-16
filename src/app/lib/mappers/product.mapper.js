@@ -79,6 +79,7 @@ export function mapProductPayload(payload) {
       id: i.id,
       src: i.image,
       alt: i.type || 'Image',
+      type: i.type || '-',
       isThumb: !!i.is_thumbnail,
     })),
     price: {

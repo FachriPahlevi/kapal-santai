@@ -1,4 +1,3 @@
-// src/app/components/product/ProductIncludes.jsx
 import { Check, X } from 'lucide-react'
 
 export default function ProductIncludes({ includes = [], excludes = [] }) {

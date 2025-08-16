@@ -46,12 +46,22 @@ svg {
   display: block;
   max-width: 100%;
 }
+/* Default link: sama kayak text biasa */
 a {
-  color: var(--primary);
+  color: var(--fg); /* abu, bukan biru */
   text-decoration: none;
 }
 a:hover {
+  color: var(--primary); /* hover jadi biru */
   text-decoration: underline;
+}
+
+/* Kalau butuh link biru selalu (misalnya di konten artikel) */
+.link {
+  color: var(--primary);
+}
+.link:hover {
+  color: var(--primary-hover);
 }
 
 h1,
@@ -84,9 +94,19 @@ p {
 }
 .container {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
+}
+@media (min-width: 640px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 32px;
+  }
 }
 .section {
   margin-bottom: 48px;
@@ -181,4 +201,15 @@ p {
 }
 .bounce-animation:active {
   transform: scale(0.98);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }

@@ -12,7 +12,7 @@ export default function ProductGallery({ images = [], openModal }) {
       .map(i => ({
         id: i?.id ?? i?.src ?? i?.image,
         src: (i?.src || i?.image || '').trim(),
-        alt: i?.alt || i?.type || 'Photo',
+        alt: i?.alt || 'Photo',
         type: i?.type ?? 'image',
         isThumb: Boolean(i?.isThumb),
       }))
@@ -42,7 +42,7 @@ export default function ProductGallery({ images = [], openModal }) {
 
   return (
     <div
-      className="relative md:border-black md:border-8 md:w-full md:rounded-2xl"
+      className="relative md:w-full md:rounded-2xl"
       style={{ margin: '-24px -24px 0 -24px', width: 'calc(100% + 48px)' }}
     >
       <div className="relative w-full overflow-hidden sm:overflow-visible">

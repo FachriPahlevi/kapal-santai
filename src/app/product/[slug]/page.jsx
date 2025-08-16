@@ -11,7 +11,10 @@ import { getProductBySlug } from '@/app/lib/api/product.service'
 import { mapProductPayload } from '@/app/lib/mappers/product.mapper'
 import Breadcrumb from '@/app/components/shared/breadcrumb'
 import ProductNavbar from '@/app/components/product/ProductNavbar'
-import ProductGalleryWrapper from '@/app/components/product/ProductGalleryWrapper'
+import ProductGalleryWrapper from '@/app/components/product/Gallery/ProductGalleryWrapper'
+import ProductPaymentPolicy from '@/app/components/product/ProductPaymentPolicy'
+import ProductRefundPolicy from '@/app/components/product/Policy/ProductRefundPolicy'
+import ProductShipPolicy from '@/app/components/product/Policy/ProductShipPolicy'
 
 export default async function Page({ params }) {
   const { slug } = params
@@ -51,7 +54,7 @@ export default async function Page({ params }) {
         <ProductNavbar />
       </section>
 
-      <section id="details" className="section px-4 sm:px-4">
+      <section id="overview" className="section px-4 sm:px-4">
         <ProductTitle
           title={`3 Hari 2 Malam Open Trip Dengan ${data.title}`}
           description={data.description}
@@ -89,6 +92,10 @@ export default async function Page({ params }) {
           includes={data.includeExclude.includes}
           excludes={data.includeExclude.excludes}
         />
+      </section>
+
+      <section id="policy" className="section px-4 sm:px-4">
+        <ProductPaymentPolicy policy={data.policy} />
       </section>
     </Container>
   )
