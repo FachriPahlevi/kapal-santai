@@ -1,12 +1,9 @@
-// src/app/product/[slug]/page.jsx
 import Container from '@/app/components/common/Container'
 import ProductTitle from '@/app/components/product/ProductTitle'
 import ProductSpecs from '@/app/components/product/ProductSpecs'
 import ProductFacilities from '@/app/components/product/ProductFacilities'
 import ProductCabinList from '@/app/components/product/ProductCabinList'
-import ProductIncludes from '@/app/components/product/ProductIncludes'
 import ProductItinerary from '@/app/components/product/ProductItinerary'
-import ProductCTA from '@/app/components/product/ProductCTA'
 import { getProductBySlug } from '@/app/lib/api/product.service'
 import { mapProductPayload } from '@/app/lib/mappers/product.mapper'
 import Breadcrumb from '@/app/components/shared/breadcrumb'
@@ -15,6 +12,7 @@ import ProductGalleryWrapper from '@/app/components/product/Gallery/ProductGalle
 import ProductPaymentPolicy from '@/app/components/product/ProductPaymentPolicy'
 import ProductRefundPolicy from '@/app/components/product/Policy/ProductRefundPolicy'
 import ProductShipPolicy from '@/app/components/product/Policy/ProductShipPolicy'
+import ProductSafetyEquipment from '@/app/components/product/ProductSafetyEquipment'
 
 export default async function Page({ params }) {
   const { slug } = params
@@ -50,7 +48,7 @@ export default async function Page({ params }) {
         <ProductGalleryWrapper images={data.gallery} />
       </section>
 
-      <section id="productNavbar" className="section hidden sm:block">
+      <section id="productNavbar" className="section px-4 sm:px-4">
         <ProductNavbar />
       </section>
 
@@ -70,12 +68,8 @@ export default async function Page({ params }) {
           <div className="lg:col-span-2 grid gap-6">
             <ProductSpecs items={data.spec} />
             <ProductFacilities items={data.facilities} />
+            <ProductSafetyEquipment items={data.safety} />
           </div>
-          <aside id="pricing" className="lg:col-span-1">
-            <div className="sticky top-[88px]">
-              <ProductCTA price={data.price} badges={data.badges} />
-            </div>
-          </aside>
         </div>
       </section>
 
@@ -84,11 +78,8 @@ export default async function Page({ params }) {
       </section>
 
       <section id="itinerary" className="section px-4 sm:px-4">
-        <ProductItinerary itinerary={data.itinerary} />
-      </section>
-
-      <section id="includes" className="section px-4 sm:px-4">
-        <ProductIncludes
+        <ProductItinerary
+          itinerary={data.itinerary}
           includes={data.includeExclude.includes}
           excludes={data.includeExclude.excludes}
         />

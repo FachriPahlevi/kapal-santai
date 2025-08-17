@@ -1,11 +1,11 @@
+// components/product/Gallery/ProductGallery.jsx
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
-import { ArrowLeft, Images } from 'lucide-react'
+import { Images } from 'lucide-react'
 import { useMemo, useRef, useState, useEffect } from 'react'
 
-export default function ProductGallery({ images = [], openModal }) {
+export default function ProductGallery({ images = [], openSingle, openAll }) {
   const list = useMemo(() => {
     if (!Array.isArray(images)) return []
     return images
@@ -25,6 +25,7 @@ export default function ProductGallery({ images = [], openModal }) {
   const heroIndex = idx >= 0 ? idx : 0
   const hero = list[heroIndex]
   const rest = list.filter((_, i) => i !== heroIndex)
+  const all = [hero, ...rest]
 
   const [active, setActive] = useState(0)
   const sliderRef = useRef(null)
@@ -32,13 +33,16 @@ export default function ProductGallery({ images = [], openModal }) {
   useEffect(() => {
     const el = sliderRef.current
     if (!el) return
-    const handleScroll = () => {
-      const index = Math.round(el.scrollLeft / el.clientWidth)
-      setActive(index)
-    }
-    el.addEventListener('scroll', handleScroll)
-    return () => el.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setActive(Math.round(el.scrollLeft / el.clientWidth))
+    el.addEventListener('scroll', onScroll)
+    return () => el.removeEventListener('scroll', onScroll)
   }, [])
+
+  const onOpen = i => e => {
+    e.preventDefault()
+    e.stopPropagation()
+    openSingle?.(i)
+  }
 
   return (
     <div
@@ -51,14 +55,12 @@ export default function ProductGallery({ images = [], openModal }) {
             ref={sliderRef}
             className="flex snap-x snap-mandatory overflow-x-auto no-scrollbar scroll-smooth"
           >
-            {[hero, ...rest].map((img, i) => (
-              <div
+            {all.map((img, i) => (
+              <button
                 key={img.id ?? i}
                 className="min-w-full snap-center"
-                onClick={openModal}
-                role="button"
-                tabIndex={0}
-                onKeyDown={e => e.key === 'Enter' && openModal?.()}
+                onClick={onOpen(i)}
+                type="button"
               >
                 <Image
                   src={img.src}
@@ -69,11 +71,11 @@ export default function ProductGallery({ images = [], openModal }) {
                   sizes="100vw"
                   className="w-full h-auto aspect-[460/360] object-cover"
                 />
-              </div>
+              </button>
             ))}
           </div>
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-            {[hero, ...rest].map((_, i) => (
+            {all.map((_, i) => (
               <span
                 key={i}
                 className={`h-1.5 w-1.5 rounded-full ${
@@ -87,7 +89,7 @@ export default function ProductGallery({ images = [], openModal }) {
         <div className="max-sm:hidden grid grid-cols-3 gap-2">
           <button
             type="button"
-            onClick={openModal}
+            onClick={onOpen(0)}
             className="relative group overflow-hidden rounded-2xl"
           >
             <Image
@@ -107,7 +109,7 @@ export default function ProductGallery({ images = [], openModal }) {
               <button
                 type="button"
                 key={img.id ?? i}
-                onClick={openModal}
+                onClick={onOpen(i + 1)}
                 className="overflow-hidden rounded-2xl"
               >
                 <Image
@@ -127,7 +129,7 @@ export default function ProductGallery({ images = [], openModal }) {
               <button
                 type="button"
                 key={img.id ?? i}
-                onClick={openModal}
+                onClick={onOpen(i + 3)}
                 className="overflow-hidden rounded-2xl"
               >
                 <Image
@@ -144,12 +146,17 @@ export default function ProductGallery({ images = [], openModal }) {
         </div>
 
         <button
-          onClick={openModal}
+          onClick={e => {
+            e.preventDefault()
+            e.stopPropagation()
+            openAll?.()
+          }}
           className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-black/40 text-white backdrop-blur px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base shadow"
+          type="button"
         >
           <Images className="h-4 w-4 sm:h-5 sm:w-5" />
           <span className="hidden sm:inline">Lihat semua foto</span>
-          <span className="sm:hidden">{list.length}</span>
+          <span className="sm:hidden">{all.length}</span>
         </button>
       </div>
     </div>

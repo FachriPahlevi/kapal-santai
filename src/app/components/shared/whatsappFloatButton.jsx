@@ -6,9 +6,9 @@ export default function WhatsAppFloatButton() {
     <Link
       href="https://wa.me/+6285338137706?text=Halo KapalSantai! Aku mau tanya tentang info paket tripnya."
       target="_blank"
-      className="group fixed right-6 sm:right-14 bottom-12 flex items-center z-10"
+      className="group fixed right-6 sm:right-14 bottom-12 flex items-center z-94"
     >
-      <div className="transition-transform duration-300 z-10 translate-x-32 group-hover:translate-x-0">
+      <div className="transition-transform duration-300 z-94 translate-x-32 group-hover:translate-x-0">
         <Image
           alt="WhatsApp Icon"
           loading="lazy"

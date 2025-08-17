@@ -1,46 +1,71 @@
+// components/product/Gallery/ProductGalleryWrapper.jsx
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import ProductGallery from './ProductGallery'
 import ModalProductGallery from './ModalProductGallery'
+import ShowGalleryModal from './ShowGalleryModal'
 
 export default function ProductGalleryWrapper({ images = [] }) {
-  const [open, setOpen] = useState(false)
+  const [openAll, setOpenAll] = useState(false)
+  const [openSingle, setOpenSingle] = useState(false)
+  const [index, setIndex] = useState(0)
 
-  // Process images to ensure they have proper structure
-  const processedImages = images.map((img, index) => {
-    if (typeof img === 'string') {
-      return {
-        id: index,
-        src: img,
-        image: img,
-        alt: `Gallery image ${index + 1}`,
-        type: 'Outdoor',
-      }
-    }
+  const list = useMemo(
+    () =>
+      images.map((img, i) =>
+        typeof img === 'string'
+          ? { id: i, src: img, image: img, alt: `Gallery image ${i + 1}` }
+          : {
+              id: img.id ?? i,
+              src: img.src || img.image,
+              image: img.src || img.image,
+              alt: img.alt || `Gallery image ${i + 1}`,
+              type: img.type || 'image',
+              isThumb: !!img.isThumb,
+            }
+      ),
+    [images]
+  )
 
-    return {
-      id: img.id || index,
-      src: img.src || img.image,
-      image: img.src || img.image,
-      alt: img.alt || `Gallery image ${index + 1}`,
-      type: img.type || 'Outdoor',
-      isThumb: img.isThumb || false,
-    }
-  })
+  const len = list.length
+  const prev = () => setIndex(v => (v - 1 + len) % len)
+  const next = () => setIndex(v => (v + 1) % len)
+  const jump = i => setIndex(i)
 
   return (
     <>
       <ProductGallery
-        images={processedImages}
-        openModal={() => setOpen(true)}
+        images={list}
+        openSingle={i => {
+          setIndex(i || 0)
+          setOpenSingle(true)
+          setOpenAll(false)
+        }}
+        openAll={() => {
+          setOpenAll(true)
+          setOpenSingle(false)
+        }}
       />
+
       <ModalProductGallery
-        isOpen={open}
-        onClose={() => setOpen(false)}
+        isOpen={openAll}
+        onClose={() => setOpenAll(false)}
         title="Galeri Kapal"
-        images={processedImages}
+        images={list}
+        initialIndex={0}
       />
+
+      {openSingle && (
+        <ShowGalleryModal
+          images={list}
+          index={index}
+          onClose={() => setOpenSingle(false)}
+          onPrev={prev}
+          onNext={next}
+          onJump={jump}
+        />
+      )}
     </>
   )
 }

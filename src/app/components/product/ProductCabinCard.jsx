@@ -1,4 +1,3 @@
-// src/app/components/product/ProductCabinCard.jsx
 'use client'
 import Image from 'next/image'
 import { iconFromApi } from './icon-map'

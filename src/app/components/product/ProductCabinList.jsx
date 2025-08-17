@@ -1,4 +1,3 @@
-// src/app/components/product/ProductCabinList.jsx
 import ProductCabinCard from './ProductCabinCard'
 
 export default function ProductCabinList({ rooms = [] }) {

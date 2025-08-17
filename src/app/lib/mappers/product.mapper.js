@@ -22,13 +22,25 @@ function parseIncludeExclude(templates = []) {
 }
 
 function personFromDetail(detail = []) {
-  // cari "Sleeps X"
   const sleeps = detail.find(
     d => d?.icon === 'person' && /sleeps\s+\d+/i.test(d?.value || '')
   )
   if (!sleeps) return null
   const m = sleeps.value.match(/(\d+)/)
   return m ? Number(m[1]) : null
+}
+
+function safetyFromTemplates(templates = []) {
+  const out = []
+  for (const s of templates) {
+    const t = s?.specification_template
+    if (!t || t.specification_type !== 'SafetyEquipment') continue
+    const label = (t.specification_id || t.specification_en || '').trim()
+    if (!label) continue
+    const val = s?.value
+    out.push(val ? `${label}: ${val}` : label)
+  }
+  return uniqueStrings(out)
 }
 
 export function mapProductPayload(payload) {
@@ -40,8 +52,18 @@ export function mapProductPayload(payload) {
   const specs = Array.isArray(ship.specification) ? ship.specification : []
   const facilities = Array.isArray(ship.facility) ? ship.facility : []
   const { includes, excludes } = parseIncludeExclude(
-    payload.specification_template_product
+    payload.product?.specification_template_product || []
   )
+
+  let safety = Array.isArray(ship.safety_equipment)
+    ? uniqueStrings(ship.safety_equipment)
+    : []
+  if (
+    (!safety || safety.length === 0) &&
+    Array.isArray(ship.specification_template_ship)
+  ) {
+    safety = safetyFromTemplates(ship.specification_template_ship)
+  }
 
   const rooms = (ship.room_availability || payload.room_availability || []).map(
     r => {
@@ -49,14 +71,14 @@ export function mapProductPayload(payload) {
       return {
         id: r.id,
         name: r.name,
-        type: r.type, // Private / Shared
+        type: r.type,
         price: r.price,
         priceFormatted: formatIDR(r.price),
         person:
           r.person && r.person > 0
             ? r.person
             : personFromDetail(r.detail) || null,
-        details: r.detail || [], // [{icon, value}]
+        details: r.detail || [],
         images,
         thumbnail: images.find(i => i.is_thumbnail) || images[0] || null,
       }
@@ -90,6 +112,7 @@ export function mapProductPayload(payload) {
     },
     spec: uniqueStrings(specs),
     facilities: uniqueStrings(facilities),
+    safety,
     rooms,
     itinerary: (payload.itinerary || []).map(d => ({
       day: d.day,
