@@ -40,10 +40,8 @@ export default async function Home() {
         <Breadcrumb items={crumbs} />
       </div>
 
-      <section id="gallery" className="mt-0 mb-6">
-        <div className="mx-auto max-w-8xl">
-          <ProductGalleryWrapper images={data.gallery} />
-        </div>
+      <section id="gallery" className="mb-6">
+        <ProductGalleryWrapper images={data.gallery} />
       </section>
 
       <section id="productNavbar" className="mb-6">

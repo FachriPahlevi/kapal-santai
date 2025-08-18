@@ -45,10 +45,6 @@ h1 {
            rounded-md text-nowrap transition-colors duration-200;
   }
 
-  /* .btn-sm {
-    @apply text-xs px-3 py-1.5 rounded-md;
-  } */
-
   .btn-lg {
     @apply text-base px-6 py-3 rounded-lg;
   }
@@ -65,12 +61,6 @@ h1 {
     @apply border-2 border-slate-300 bg-white text-black font-medium;
   }
 
-  .bounce-animation {
-    @apply transition-transform duration-150;
-  }
-  .bounce-animation:active {
-    transform: scale(0.95);
-  }
   .bounce-animation {
     @apply transition-transform duration-150;
   }
@@ -95,6 +85,7 @@ h1 {
   .animate-fadeIn {
     animation: fadeIn 0.25s ease-out;
   }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -103,6 +94,7 @@ h1 {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   #policy p {
     @apply text-muted;
   }

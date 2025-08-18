@@ -28,23 +28,29 @@ export default function Header() {
         />
       </Link>
 
-      <div className="hidden items-center gap-6 xl:flex text-muted">
-        <Link href="/product" className="hover:text-primary focus:text-primary">
+      <div className="hidden xl:flex items-center gap-6 text-muted">
+        <Link
+          href="/product"
+          className="hover:text-primary focus:text-primary whitespace-nowrap font-normal"
+        >
           Sewa Kapal
         </Link>
         <Link
           href="/ship-registration"
-          className="hover:text-primary focus:text-primary"
+          className="hover:text-primary focus:text-primary whitespace-nowrap font-normal"
         >
           Menjadi Mitra Kapal
         </Link>
         <Link
           href="/about-us"
-          className="hover:text-primary focus:text-primary"
+          className="hover:text-primary focus:text-primary whitespace-nowrap font-normal"
         >
           Tentang Kami
         </Link>
-        <Link href="/support" className="hover:text-primary focus:text-primary">
+        <Link
+          href="/support"
+          className="hover:text-primary focus:text-primary whitespace-nowrap font-normal"
+        >
           Dukungan
         </Link>
       </div>
@@ -52,7 +58,7 @@ export default function Header() {
       <button
         aria-label="Ganti bahasa"
         onClick={() => setIsLangOpen(true)}
-        className="xl:flex hidden"
+        className="hidden xl:flex"
       >
         <Image
           src={lang === 'id' ? '/assets/flags/id.svg' : '/assets/flags/uk.svg'}
@@ -77,7 +83,7 @@ export default function Header() {
         />
       </button>
 
-      <div className="hidden items-center gap-4 xl:flex">
+      <div className="hidden xl:flex items-center gap-4">
         <Link
           href="/register"
           className="btn btn-primary btn-sm bounce-animation"
@@ -112,10 +118,18 @@ export default function Header() {
           className="absolute left-0 top-[65px] w-full bg-white px-6 py-6 shadow-md md:top-[72px] xl:hidden"
         >
           <nav className="flex flex-col gap-4">
-            <Link href="/product">Sewa Kapal</Link>
-            <Link href="/ship-registration">Menjadi Mitra Kapal</Link>
-            <Link href="/about-us">Tentang Kami</Link>
-            <Link href="/support">Dukungan</Link>
+            <Link href="/product" className="font-normal">
+              Sewa Kapal
+            </Link>
+            <Link href="/ship-registration" className="font-normal">
+              Menjadi Mitra Kapal
+            </Link>
+            <Link href="/about-us" className="font-normal">
+              Tentang Kami
+            </Link>
+            <Link href="/support" className="font-normal">
+              Dukungan
+            </Link>
           </nav>
           <div className="mt-4 flex gap-3">
             <Link href="/register" className="btn btn-primary w-full">

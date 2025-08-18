@@ -22,8 +22,8 @@ export default function RootLayout({ children }) {
         <div className="hidden md:block">
           <Header />
         </div>
-        <div className="h-0 md:h-[72px]" aria-hidden />
-        <main className="pt-0 pb-8 sm:py-8">{children}</main>
+        <div className="hidden md:block h-[72px]" aria-hidden />
+        <main className="pt-0 md:pt-6 pb-6">{children}</main>
         <WhatsAppFloatButton />
         <Footer />
       </body>
