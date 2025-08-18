@@ -64,10 +64,9 @@ function mapShipRoom(r) {
 }
 
 function mapProductRoomAvailability(item) {
-  // Bentuk: { id, thumbnail, price, additional_price, room_availability: {...tanpa images} }
   const ra = item?.room_availability || {}
   const detail = Array.isArray(ra.detail) ? ra.detail : []
-  const images = Array.isArray(ra.images) ? ra.images : [] // biasanya kosong pada sumber ini
+  const images = Array.isArray(ra.images) ? ra.images : [] 
   const price = item?.price ?? ra?.price ?? null
   return {
     id: ra.id || item.id,
@@ -89,7 +88,6 @@ function mapProductRoomAvailability(item) {
 export function mapProductPayload(input) {
   if (!input) return null
 
-  // Bisa diberikan full response { code, message, payload } atau payload langsung
   const root = input?.payload ?? input
   if (!root?.product) return null
 
@@ -104,7 +102,6 @@ export function mapProductPayload(input) {
     root.product?.specification_template_product || []
   )
 
-  // Safety: pakai field langsung kalau ada, kalau null/empty fallback template
   let safety = Array.isArray(ship.safety_equipment)
     ? uniqueStrings(ship.safety_equipment)
     : []
@@ -115,9 +112,6 @@ export function mapProductPayload(input) {
     safety = safetyFromTemplates(ship.specification_template_ship)
   }
 
-  // Rooms gabungan dari dua sumber:
-  // 1) product.ship.room_availability (punya images)
-  // 2) product_room_availability (thumbnail + nested room_availability)
   const shipRooms = Array.isArray(ship.room_availability)
     ? ship.room_availability.map(mapShipRoom)
     : []
@@ -126,7 +120,6 @@ export function mapProductPayload(input) {
     ? root.product_room_availability.map(mapProductRoomAvailability)
     : []
 
-  // Gabungkan & hilangkan duplikat berdasarkan id
   const roomsMap = new Map()
   ;[...shipRooms, ...prRooms].forEach(r => {
     if (!r?.id) return
