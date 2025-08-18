@@ -2,143 +2,133 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import ModalLanguage from '../shared/ModalLanguange'
 
-export default function Navbar() {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isLangOpen, setIsLangOpen] = useState(false)
+  const [lang, setLang] = useState('id')
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem('lang') || 'id'
+    setLang(savedLang)
+  }, [isLangOpen])
 
   return (
-    <nav className="absolute bg-white px-4 xl:gap-7 gap-4 xl:px-36 md:px-20 sm:px-10 py-4 shadow-md w-full transition-all flex items-center top-0 z-50 left-0 h-[65px] md:h-[72px]">
+    <nav className="absolute top-0 left-0 z-50 flex h-[65px] w-full items-center bg-white px-4 py-4 shadow-md sm:px-10 md:h-[72px] md:px-20 xl:px-36 xl:gap-7 gap-4 font-sans">
       <Link href="/" className="mr-auto" aria-label="Kapal Santai">
         <Image
           src="/assets/logo/logo.svg"
           alt="logo"
           width={190}
           height={190}
-          className="transition-all md:w-[168px] w-[128px]"
+          className="w-[128px] transition-all md:w-[168px]"
           priority
         />
       </Link>
 
-      <div className="flex gap-6 max-xl:hidden items-center">
-        <Link
-          href="/product"
-          className="hover:text-primary focus:text-primary text-nowrap"
-        >
+      <div className="hidden items-center gap-6 xl:flex text-muted">
+        <Link href="/product" className="hover:text-primary focus:text-primary">
           Sewa Kapal
         </Link>
         <Link
           href="/ship-registration"
-          className="hover:text-primary focus:text-primary text-nowrap"
+          className="hover:text-primary focus:text-primary"
         >
           Menjadi Mitra Kapal
         </Link>
         <Link
           href="/about-us"
-          className="hover:text-primary focus:text-primary text-nowrap"
+          className="hover:text-primary focus:text-primary"
         >
           Tentang Kami
         </Link>
-        <Link
-          href="/support"
-          className="hover:text-primary focus:text-primary text-nowrap"
-        >
+        <Link href="/support" className="hover:text-primary focus:text-primary">
           Dukungan
         </Link>
       </div>
 
-      <div className="max-xl:hidden">
-        <div className="h-full flex items-center relative text-left">
-          <button aria-label="Ganti bahasa">
-            <Image
-              src="/assets/flags/id.svg"
-              alt="ID"
-              width={190}
-              height={190}
-              className="md:w-10 sm:h-10 w-6 h-6"
-            />
-          </button>
-        </div>
-      </div>
+      <button
+        aria-label="Ganti bahasa"
+        onClick={() => setIsLangOpen(true)}
+        className="xl:flex hidden"
+      >
+        <Image
+          src={lang === 'id' ? '/assets/flags/id.svg' : '/assets/flags/uk.svg'}
+          alt={lang.toUpperCase()}
+          width={24}
+          height={24}
+          className="h-6 w-6 sm:h-10 md:w-10"
+        />
+      </button>
 
-      <div className="xl:hidden">
-        <div className="h-full flex items-center relative text-left">
-          <button aria-label="Ganti bahasa">
-            <Image
-              src="/assets/flags/id.svg"
-              alt="ID"
-              width={190}
-              height={190}
-              className="md:w-10 sm:h-10 w-6 h-6"
-            />
-          </button>
-        </div>
-      </div>
+      <button
+        aria-label="Ganti bahasa"
+        onClick={() => setIsLangOpen(true)}
+        className="xl:hidden"
+      >
+        <Image
+          src={lang === 'id' ? '/assets/flags/id.svg' : '/assets/flags/uk.svg'}
+          alt={lang.toUpperCase()}
+          width={24}
+          height={24}
+          className="h-6 w-6 sm:h-10 md:w-10"
+        />
+      </button>
 
-      <div className="max-xl:hidden flex gap-4 items-center">
-        <Link href="/register" className="btn btn-primary text-sm text-nowrap">
+      <div className="hidden items-center gap-4 xl:flex">
+        <Link
+          href="/register"
+          className="btn btn-primary btn-sm bounce-animation"
+        >
           Daftar
         </Link>
-
-        <Link
-          href="/login"
-          className="btn btn-outline text-sm text-nowrap bg-white font-medium"
-        >
+        <Link href="/login" className="btn btn-outline btn-sm bounce-animation">
           Masuk
         </Link>
       </div>
 
-      {/* Hamburger (mobile) */}
       <button
         type="button"
         aria-label="Buka menu"
+        aria-expanded={isOpen}
+        aria-controls="mobile-menu"
         onClick={() => setIsOpen(v => !v)}
         className="xl:hidden"
       >
         <Image
           src="/assets/icons/hamburger-menu.svg"
           alt="menu"
-          width={500}
-          height={500}
-          className="md:w-11 md:h-11 w-8 h-8 text-black md:-p-2"
+          width={32}
+          height={32}
+          className="h-8 w-8 md:h-11 md:w-11"
         />
       </button>
 
-      {/* Drawer Mobile */}
       {isOpen && (
-        <div className="absolute left-0 top-[72px] w-full bg-white shadow-md xl:hidden px-6 py-6">
+        <div
+          id="mobile-menu"
+          className="absolute left-0 top-[65px] w-full bg-white px-6 py-6 shadow-md md:top-[72px] xl:hidden"
+        >
           <nav className="flex flex-col gap-4">
-            <Link href="/product" onClick={() => setIsOpen(false)}>
-              Sewa Kapal
-            </Link>
-            <Link href="/ship-registration" onClick={() => setIsOpen(false)}>
-              Menjadi Mitra Kapal
-            </Link>
-            <Link href="/about-us" onClick={() => setIsOpen(false)}>
-              Tentang Kami
-            </Link>
-            <Link href="/support" onClick={() => setIsOpen(false)}>
-              Dukungan
-            </Link>
+            <Link href="/product">Sewa Kapal</Link>
+            <Link href="/ship-registration">Menjadi Mitra Kapal</Link>
+            <Link href="/about-us">Tentang Kami</Link>
+            <Link href="/support">Dukungan</Link>
           </nav>
           <div className="mt-4 flex gap-3">
-            <Link
-              href="/register"
-              onClick={() => setIsOpen(false)}
-              className="btn btn-primary w-full"
-            >
+            <Link href="/register" className="btn btn-primary w-full">
               Daftar
             </Link>
-            <Link
-              href="/login"
-              onClick={() => setIsOpen(false)}
-              className="btn btn-outline w-full"
-            >
+            <Link href="/login" className="btn btn-outline w-full">
               Masuk
             </Link>
           </div>
         </div>
       )}
+
+      <ModalLanguage isOpen={isLangOpen} onClose={() => setIsLangOpen(false)} />
     </nav>
   )
 }

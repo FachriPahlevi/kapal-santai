@@ -1,31 +1,35 @@
 export const dynamic = 'force-static'
 
-export default function KapalsantaiPolicies() {
+export default function ProductPolicy() {
   return (
-    <section id="policy" className="space-y-12 text-slate-900">
+    <section id="policy" className="space-y-12 text-black">
       <div className="grid grid-cols-1 sm:grid-cols-[205px_minmax(0,1fr)] gap-4 sm:gap-6">
         <h3 className="text-2xl font-bold">Kebijakan Pembayaran</h3>
-        <div className="space-y-4 text-slate-800 text-sm sm:text-base leading-relaxed">
+        <div className="space-y-4 text-black text-sm sm:text-base leading-relaxed">
           <div className="space-y-2">
-            <p className="font-semibold">Pemesanan</p>
+            <h3 className="font-semibold text-black">Pemesanan</h3>
             <p>
               Semua pemesanan harus melalui akun terdaftar dan akan disambungkan
               dengan Customer Service Kapalsantai di WhatsApp.
             </p>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Pembayaran Penuh di Muka</p>
+            <h3 className="font-semibold text-black">
+              Pembayaran Penuh di Muka
+            </h3>
             <p>Slot dikunci setelah pelunasan 100 % harga paket di muka.</p>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Masa Berlaku Link Pembayaran</p>
+            <h3 className="font-semibold text-black">
+              Masa Berlaku Link Pembayaran
+            </h3>
             <p>
               Link pembayaran berlaku 24 jam; jika kedaluwarsa, slot otomatis
               kembali ke inventori tanpa penalti.
             </p>
           </div>
           <div className="space-y-3">
-            <p className="font-semibold">Pembayaran</p>
+            <h3 className="font-semibold text-black">Pembayaran</h3>
             <ol className="list-decimal pl-5 space-y-2">
               <li>
                 <p>
@@ -59,9 +63,9 @@ export default function KapalsantaiPolicies() {
 
       <div className="grid grid-cols-1 sm:grid-cols-[205px_minmax(0,1fr)] gap-4 sm:gap-6">
         <h3 className="text-2xl font-bold">Kebijakan Kapal</h3>
-        <div className="space-y-4 text-slate-800 text-sm sm:text-base leading-relaxed">
+        <div className="space-y-4 text-black text-sm sm:text-base leading-relaxed">
           <div className="space-y-2">
-            <p className="font-semibold">Reschedule</p>
+            <h3 className="font-semibold text-black">Reschedule</h3>
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 Reschedule hanya boleh dilakukan 1 kali. Ajukan permintaan
@@ -76,7 +80,9 @@ export default function KapalsantaiPolicies() {
             </ul>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">No-Show & Keterlambatan</p>
+            <h3 className="font-semibold text-black">
+              No-Show & Keterlambatan
+            </h3>
             <ul className="list-disc pl-5 space-y-1">
               <li>Wajib tiba di Labuan Bajo H-1.</li>
               <li>
@@ -91,7 +97,7 @@ export default function KapalsantaiPolicies() {
             </ul>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Kapasitas & Usia</p>
+            <h3 className="font-semibold text-black">Kapasitas & Usia</h3>
             <p>
               Jumlah tamu tidak boleh melebihi manifest operator (cek katalog
               kapal). Kategori harga:
@@ -103,7 +109,7 @@ export default function KapalsantaiPolicies() {
             </ul>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Kesehatan</p>
+            <h3 className="font-semibold text-black">Kesehatan</h3>
             <p>
               Tamu dengan kondisi jantung serius, epilepsi, hamil ≥ 32 minggu
               dan lain-lain wajib berkonsultasi dengan dokter. Mitra Kapal
@@ -112,7 +118,7 @@ export default function KapalsantaiPolicies() {
             </p>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Perilaku</p>
+            <h3 className="font-semibold text-black">Perilaku</h3>
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 Merokok dan mengonsumsi alkohol di atas kapal wajib mematuhi
@@ -125,7 +131,9 @@ export default function KapalsantaiPolicies() {
             </ul>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Kebijakan Makanan & Minuman</p>
+            <h3 className="font-semibold text-black">
+              Kebijakan Makanan & Minuman
+            </h3>
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 Setiap kapal menyediakan menu dasar halal (nasi, lauk, sayur,
@@ -140,14 +148,14 @@ export default function KapalsantaiPolicies() {
             </ul>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Briefing Keselamatan</p>
+            <h3 className="font-semibold text-black">Briefing Keselamatan</h3>
             <p>
               Mitra Kapal wajib memberi demo life-jacket & prosedur evakuasi
               sebelum kapal berlayar.
             </p>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Ringkasan Liabilitas</p>
+            <h3 className="font-semibold text-black">Ringkasan Liabilitas</h3>
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 Aktivitas di dalam kapal menjadi tanggung jawab Mitra Kapal.
@@ -164,17 +172,17 @@ export default function KapalsantaiPolicies() {
             </ul>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Penggantian Kapal</p>
+            <h3 className="font-semibold text-black">Penggantian Kapal</h3>
             <ol className="list-decimal pl-5 space-y-2">
               <li>
-                <span className="font-semibold">Force Majeure</span>
+                <h3 className="font-semibold text-black">Force Majeure</h3>
                 <p>
                   Kejadian di luar kendali (cuaca buruk ekstrem, larangan
                   pelayaran) → refund penuh otomatis.
                 </p>
               </li>
               <li>
-                <span className="font-semibold">Double Booking</span>
+                <h3 className="font-semibold text-black">Double Booking</h3>
                 <p>
                   Kesalahan update jadwal oleh admin kapal → admin kapal
                   mencarikan kapal pengganti sesuai tipe trip (Private/Open).
@@ -183,7 +191,7 @@ export default function KapalsantaiPolicies() {
                 </p>
               </li>
               <li>
-                <span className="font-semibold">Overbooking</span>
+                <h3 className="font-semibold text-black">Overbooking</h3>
                 <p>
                   Slot penuh di kapal yang dipesan → dipindahkan ke kapal lain.
                 </p>
@@ -198,7 +206,7 @@ export default function KapalsantaiPolicies() {
             </ol>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Force Majeure</p>
+            <h3 className="font-semibold text-black">Force Majeure</h3>
             <p>
               Pelayaran dapat dibatalkan/diubah rute sewaktu-waktu oleh
               kapten/syahbandar.
@@ -209,25 +217,25 @@ export default function KapalsantaiPolicies() {
 
       <div className="grid grid-cols-1 sm:grid-cols-[205px_minmax(0,1fr)] gap-4 sm:gap-6">
         <h3 className="text-2xl font-bold">Kebijakan Refund & Reschedule</h3>
-        <div className="space-y-4 text-slate-800 text-sm sm:text-base leading-relaxed">
+        <div className="space-y-4 text-black text-sm sm:text-base leading-relaxed">
           <div className="space-y-2">
-            <p className="font-semibold">Pembatalan Kolektif</p>
+            <h3 className="font-semibold text-black">Pembatalan Kolektif</h3>
             <p>
               Sistem tidak mendukung refund sebagian; pengembalian dana hanya
               berlaku jika seluruh booking dibatalkan.
             </p>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">
+            <h3 className="font-semibold text-black">
               Satu Transaksi, Satu Penanggung Jawab
-            </p>
+            </h3>
             <p>
               Setiap reservasi dicatat sebagai satu transaksi atas nama satu
               tamu utama/representatif.
             </p>
           </div>
           <div className="space-y-2">
-            <p className="font-semibold">Substitusi Tamu</p>
+            <h3 className="font-semibold text-black">Substitusi Tamu</h3>
             <p>
               Tamu yang batal dapat diganti tanpa proses refund; cukup berikan
               data pengganti kepada Customer Service saat mengajukan perubahan

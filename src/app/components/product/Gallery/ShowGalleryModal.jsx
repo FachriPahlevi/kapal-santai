@@ -1,8 +1,6 @@
-// components/product/Gallery/GalleryModal.jsx
 'use client'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function ShowGalleryModal({
   images = [],
@@ -13,6 +11,8 @@ export default function ShowGalleryModal({
   onJump,
 }) {
   const current = images[index] || {}
+  const thumbRef = useRef(null)
+  const [scrollX, setScrollX] = useState(0)
 
   useEffect(() => {
     const onKey = e => {
@@ -25,13 +25,7 @@ export default function ShowGalleryModal({
   }, [onClose, onPrev, onNext])
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0b1b2b]/95 overflow-x-hidden">
-      <Link
-        href="/product"
-        className="absolute left-5 top-5 text-white/90 hover:text-white text-sm underline-offset-4 hover:underline"
-      >
-        Lihat semua kapal
-      </Link>
+    <div className="fixed inset-0 z-999 flex items-center justify-center bg-[#0b1b2b]/95 overflow-x-hidden animate-fadeIn">
       <button
         onClick={onClose}
         aria-label="Close"
@@ -67,25 +61,30 @@ export default function ShowGalleryModal({
           )}
         </div>
 
-        <div className="mt-4 flex items-center gap-3 overflow-x-hidden px-1">
-          {images.map((img, i) => (
-            <button
-              key={img.id || i}
-              onClick={() => onJump?.(i)}
-              className={`relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-xl ring-2 ${
-                i === index ? 'ring-white' : 'ring-transparent'
-              }`}
-              aria-label={`thumb-${i + 1}`}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt || 'Thumb'}
-                fill
-                sizes="96px"
-                className="object-cover"
-              />
-            </button>
-          ))}
+        <div className="relative mt-4 flex items-center justify-center">
+          <div
+            ref={thumbRef}
+            className="flex gap-3 overflow-x-auto no-scrollbar px-8"
+          >
+            {images.map((img, i) => (
+              <button
+                key={img.id || i}
+                onClick={() => onJump?.(i)}
+                className={`relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-xl ring-2 ${
+                  i === index ? 'ring-white' : 'ring-transparent'
+                }`}
+                aria-label={`thumb-${i + 1}`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt || 'Thumb'}
+                  fill
+                  sizes="96px"
+                  className="object-cover"
+                />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

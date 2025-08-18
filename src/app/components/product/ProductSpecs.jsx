@@ -1,25 +1,67 @@
+'use client'
+
+import { ChevronDown } from 'lucide-react'
+import { useState } from 'react'
+
 export default function ProductSpecs({ items = [] }) {
-  const mid = Math.ceil(items.length / 2)
-  const left = items.slice(0, mid)
-  const right = items.slice(mid)
+  const [isOpen, setIsOpen] = useState(false)
+  const list = (items || []).filter(Boolean).map(s => String(s).trim())
+  const left = list.filter((_, i) => i % 2 === 0)
+  const right = list.filter((_, i) => i % 2 === 1)
 
   return (
-    <section className="p-4">
-      <h2 className="mb-3 text-xl font-semibold text-slate-900">
-        Spesifikasi kapal
-      </h2>
-      <div className="grid grid-cols-1 gap-y-2 sm:grid-cols-2 sm:gap-x-10">
-        <ul className="list-disc list-inside text-slate-800">
-          {left.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
-        <ul className="list-disc list-inside text-slate-800">
-          {right.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
+    <>
+      <div className="sm:hidden">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center justify-between w-full p-4 text-left"
+        >
+          <p className="text-xl font-semibold text-black">Spesifikasi kapal</p>
+          <ChevronDown
+            className={`h-5 w-5 transition-transform ${
+              isOpen ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+        {isOpen && (
+          <div className="px-4 pb-4">
+            <div className="space-y-2 text-sm">
+              {list.map((t, i) => (
+                <div key={i} className="flex gap-2">
+                  <p>•</p>
+                  <p>{t}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-    </section>
+
+      <div className="max-sm:hidden sm:-mt-8">
+        <div className="flex items-center gap-2">
+          <p className="text-xl font-semibold text-black mb-2">
+            Spesifikasi kapal
+          </p>
+        </div>
+        <div className="grid grid-cols-2 text-14 px-2">
+          <div>
+            {left.map((t, i) => (
+              <div key={`l-${i}`} className="flex gap-2">
+                <p>•</p>
+                <p>{t}</p>
+              </div>
+            ))}
+          </div>
+          <div>
+            {right.map((t, i) => (
+              <div key={`r-${i}`} className="flex gap-2 ml-4">
+                <p>•</p>
+                <p>{t}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   )
 }

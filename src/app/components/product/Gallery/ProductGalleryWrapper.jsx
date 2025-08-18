@@ -1,4 +1,3 @@
-// components/product/Gallery/ProductGalleryWrapper.jsx
 'use client'
 
 import { useMemo, useState } from 'react'
@@ -7,6 +6,7 @@ import ModalProductGallery from './ModalProductGallery'
 import ShowGalleryModal from './ShowGalleryModal'
 
 export default function ProductGalleryWrapper({ images = [] }) {
+  if (!images.length) return null
   const [openAll, setOpenAll] = useState(false)
   const [openSingle, setOpenSingle] = useState(false)
   const [index, setIndex] = useState(0)

@@ -1,9 +1,9 @@
-// components/product/Gallery/ProductGallery.jsx
 'use client'
 
 import Image from 'next/image'
-import { Images } from 'lucide-react'
+import { ArrowLeft, ChevronLeft, Images } from 'lucide-react'
 import { useMemo, useRef, useState, useEffect } from 'react'
+import Link from 'next/link'
 
 export default function ProductGallery({ images = [], openSingle, openAll }) {
   const list = useMemo(() => {
@@ -45,12 +45,29 @@ export default function ProductGallery({ images = [], openSingle, openAll }) {
   }
 
   return (
-    <div
-      className="relative md:w-full md:rounded-2xl"
-      style={{ margin: '-24px -24px 0 -24px', width: 'calc(100% + 48px)' }}
-    >
-      <div className="relative w-full overflow-hidden sm:overflow-visible">
-        <div className="sm:hidden relative">
+    <>
+      <div className="max-sm:hidden mb-2">
+        <Link
+          href="/product"
+          className="inline-flex items-center gap-2 text-sm font-medium text-black hover:text-blue-600 transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span>Lihat semua kapal</span>
+        </Link>
+      </div>
+
+      <div className="relative w-full sm:w-auto">
+        <div className="sm:hidden">
+          <Link
+            href="/product"
+            className="absolute top-3 left-3 z-10 inline-flex items-center justify-center 
+                 rounded-full bg-white p-1.5 text-black shadow-md hover:bg-gray-50 transition-colors"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <div className="sm:hidden relative -mx-4">
           <div
             ref={sliderRef}
             className="flex snap-x snap-mandatory overflow-x-auto no-scrollbar scroll-smooth"
@@ -78,7 +95,7 @@ export default function ProductGallery({ images = [], openSingle, openAll }) {
             {all.map((_, i) => (
               <span
                 key={i}
-                className={`h-1.5 w-1.5 rounded-full ${
+                className={`h-1.5 w-1.5 rounded-full transition-colors ${
                   i === active ? 'bg-white' : 'bg-white/60'
                 }`}
               />
@@ -86,11 +103,11 @@ export default function ProductGallery({ images = [], openSingle, openAll }) {
           </div>
         </div>
 
-        <div className="max-sm:hidden grid grid-cols-3 gap-2">
+        <div className="max-sm:hidden grid grid-cols-3 gap-2 rounded-2xl overflow-hidden">
           <button
             type="button"
             onClick={onOpen(0)}
-            className="relative group overflow-hidden rounded-2xl"
+            className="relative group overflow-hidden"
           >
             <Image
               src={hero.src}
@@ -110,7 +127,7 @@ export default function ProductGallery({ images = [], openSingle, openAll }) {
                 type="button"
                 key={img.id ?? i}
                 onClick={onOpen(i + 1)}
-                className="overflow-hidden rounded-2xl"
+                className="overflow-hidden group"
               >
                 <Image
                   src={img.src}
@@ -118,7 +135,7 @@ export default function ProductGallery({ images = [], openSingle, openAll }) {
                   width={1000}
                   height={600}
                   sizes="(min-width:1024px) 33vw, 50vw"
-                  className="w-full h-auto aspect-[460/180] object-cover"
+                  className="w-full h-auto aspect-[460/180] object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </button>
             ))}
@@ -130,7 +147,7 @@ export default function ProductGallery({ images = [], openSingle, openAll }) {
                 type="button"
                 key={img.id ?? i}
                 onClick={onOpen(i + 3)}
-                className="overflow-hidden rounded-2xl"
+                className="overflow-hidden group"
               >
                 <Image
                   src={img.src}
@@ -138,7 +155,7 @@ export default function ProductGallery({ images = [], openSingle, openAll }) {
                   width={1000}
                   height={600}
                   sizes="(min-width:1024px) 33vw, 50vw"
-                  className="w-full h-auto aspect-[460/180] object-cover"
+                  className="w-full h-auto aspect-[460/180] object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </button>
             ))}
@@ -151,14 +168,20 @@ export default function ProductGallery({ images = [], openSingle, openAll }) {
             e.stopPropagation()
             openAll?.()
           }}
-          className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-black/40 text-white backdrop-blur px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base shadow"
+          className="absolute bottom-4 right-4 inline-flex items-center gap-2 text-white px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:font-semibold transition-all"
           type="button"
         >
-          <Images className="h-4 w-4 sm:h-5 sm:w-5" />
-          <span className="hidden sm:inline">Lihat semua foto</span>
-          <span className="sm:hidden">{all.length}</span>
+          <Image
+            src="/assets/icons/image.svg"
+            alt="Lihat semua foto"
+            width={20}
+            height={20}
+            className="h-4 w-4 sm:h-5 sm:w-5"
+          />
+          <span className="hidden sm:inline text-white">Lihat semua foto</span>
+          <span className="sm:hidden font-medium">{all.length}</span>
         </button>
       </div>
-    </div>
+    </>
   )
 }

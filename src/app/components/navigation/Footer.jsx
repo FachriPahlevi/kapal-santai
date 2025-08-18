@@ -3,9 +3,8 @@ import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <footer className="lg:px-36 md:px-20 sm:px-10 w-full px-4 pt-20 mt-20 max-sm:pt-5 border-t">
+    <footer className="lg:px-36 md:px-20 sm:px-10 w-full px-4 pt-20 mt-20 max-sm:pt-5 border-slate-200 border-t">
       <div className="flex flex-wrap max-md:flex-col gap-10 text-nowrap">
-        {/* Kolom 1 */}
         <div className="flex flex-1 flex-col gap-5 mr-20 max-w-96 text-wrap">
           <Link href="/">
             <Image
@@ -17,7 +16,6 @@ export default function Footer() {
             />
           </Link>
 
-          {/* Alamat */}
           <div className="flex gap-3 items-start">
             <Image
               src="/assets/icons/address.svg"
@@ -44,7 +42,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Email */}
           <div className="flex gap-3">
             <Image
               src="/assets/icons/email.svg"
@@ -58,7 +55,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Kontak */}
           <div className="flex gap-3">
             <Image
               src="/assets/icons/contact.svg"
@@ -73,7 +69,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Kolom 2 */}
         <div className="flex flex-1 flex-col gap-3">
           <p className="font-medium text-black">Perusahaan</p>
           <Link href="/about-us">Tentang Kami</Link>
@@ -83,7 +78,6 @@ export default function Footer() {
           </Link>
         </div>
 
-        {/* Kolom 3 */}
         <div className="flex flex-1 flex-col gap-3">
           <p className="font-medium text-black">Dukungan</p>
           <Link href="/support">Pusat Bantuan</Link>
@@ -91,7 +85,6 @@ export default function Footer() {
           <Link href="/terms-and-conditions">Syarat &amp; Ketentuan</Link>
         </div>
 
-        {/* Kolom 4 */}
         <div className="flex flex-1 flex-col gap-5 text-main">
           <p className="font-medium text-black">Sosial Media</p>
           <a
@@ -100,16 +93,16 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="bounce-animation flex items-center gap-3 -mt-2"
           >
-            {/* SVG Facebook */}
             <svg
-              stroke="currentColor"
-              fill="currentColor"
-              viewBox="0 0 512 512"
-              height="20"
-              width="20"
               xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
             >
-              <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" />
+              <path
+                fill="#0077B6"
+                d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95"
+              />
             </svg>
             <p className="text-default">Kapalsantai</p>
           </a>
@@ -119,24 +112,23 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="bounce-animation flex items-center gap-3"
           >
-            {/* SVG Instagram */}
             <svg
-              stroke="currentColor"
-              fill="currentColor"
-              viewBox="0 0 448 512"
-              height="20"
-              width="20"
               xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
             >
-              <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+              <path
+                fill="#0077B6"
+                d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"
+              />
             </svg>
             <p className="text-default">Kapalsantai</p>
           </a>
         </div>
       </div>
 
-      {/* Copyright */}
-      <div className="mx-auto border-t sm:pb-10 my-5 sm:mt-10 py-5 sm:pt-10 flex justify-between gap-4 items-center flex-wrap-reverse">
+      <div className="mx-auto border-t sm:pb-10 my-5 sm:mt-10 py-5 border-slate-200 sm:pt-10 flex justify-between gap-4 items-center flex-wrap-reverse">
         <p className="text-base max-sm:text-center">
           © {new Date().getFullYear()} PT Santai Digital Services.
         </p>

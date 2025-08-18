@@ -5,7 +5,7 @@ export default function Breadcrumb({ items = [] }) {
   if (!items.length) return null
 
   return (
-    <nav aria-label="Breadcrumb" className="mb-24 text-sm">
+    <nav aria-label="Breadcrumb" className="mb-14 text-sm">
       <ol className="flex flex-wrap items-center">
         {items.map((it, idx) => {
           const isLast = idx === items.length - 1
@@ -15,11 +15,11 @@ export default function Breadcrumb({ items = [] }) {
                 <ChevronRight className="mx-1 h-3.5 w-3.5 text-slate-400" />
               )}
               {isLast ? (
-                <span className="font-medium text-blue-600">{it.label}</span>
+                <span className=" text-primary">Detail Kapal</span>
               ) : (
                 <Link
                   href={it.href}
-                  className="text-slate-500 hover:text-slate-700 transition-colors"
+                  className="text-slate-500 hover:text-mute transition-colors"
                 >
                   {it.label}
                 </Link>
